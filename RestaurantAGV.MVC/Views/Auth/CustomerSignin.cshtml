@@ -1,0 +1,38 @@
+@model RestaurantAGV.MVC.Models.Auth.CustomerSigninModel
+
+@{}
+
+
+<article>
+    <header>
+        <h1 class="text-center mainTitleFont my-5">Welcome to RestaurantAGV</h1>
+        <h5 class="text-center mainTitleFont">Sign-in to Order Menu</h5>
+        <a asp-action="AdminSignin" class="text-center lead d-block blockLink text-muted">Click here for stuff</a>
+    </header>
+
+    <div class="row justify-content-center">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="text-center">
+                <img src="~/icons/salad.png" alt="RestaurantAGV's Logo" width="164">
+            </div>
+            <div class="m-5">
+                <form method="post">
+                    <div class="my-4">
+                        <span asp-validation-for="Credencial" class="form-label text-danger"></span>
+                        <input asp-for="Credencial" placeholder="Customer's Credencial" class="form-control text-center">
+                        <span class="form-text">@Model.ErrorMessage</span>
+                        <input asp-for="ReturnUrl" type="hidden">
+                    </div>
+                    <button type="submit" class="mainBtn w-100">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+
+
+}

@@ -1,9 +1,11 @@
 using RestaurantAGV.MVC.Models.Elements;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantAGV.MVC.Models.Customer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestaurantAGV.MVC.Controllers;
 
+[Authorize("CustomerPolicy")]
 public class CustomerController : Controller{
 
 

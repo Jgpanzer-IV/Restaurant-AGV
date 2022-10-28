@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantAGV.MVC.Models;
 
 namespace RestaurantAGV.MVC.Controllers;
+
 
 public class HomeController : Controller
 {
@@ -12,7 +14,8 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-
+    
+    [Authorize]
     public IActionResult Index()
     {
         return View();

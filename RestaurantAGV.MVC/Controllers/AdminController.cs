@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantAGV.MVC.Models.Admin;
 using RestaurantAGV.MVC.Models.Elements;
 using RestaurantAGV.MVC.Constants;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestaurantAGV.MVC.Controllers;
 
-
+[Authorize("AdminPolicy")]
 public class AdminController : Controller{
 
     public AdminController()
