@@ -1,0 +1,27 @@
+@model RestaurantAGV.MVC.Models.Customer.BasketModel
+
+<div class="colorBackgroundII p-5 ">
+    <h1 class="mainTitleFont text-center colorFontIII p-5">Basket</h1>
+</div>
+
+<div class="container">
+
+    <div class="d-flex flex-wrap justify-content-center">
+        @if(Model.SelectedMenu != null){
+            @foreach (var item in Model.SelectedMenu)
+            {
+                <partial name="assets\_MenuStatus" model="item"></partial>   
+            }
+        }
+    </div>
+
+    <div class="row justify-content-center my-5">
+        <div class="col-sm-6 text-center">
+            <p class="mainTitleFont colorFontI">Total Price @Model.TotalPrice.ToString("C")</p>
+        </div>
+        <div class="col-sm-4">
+            <a class="mainBtn w-100">Purchase</a>
+        </div>
+    </div>
+
+</div>

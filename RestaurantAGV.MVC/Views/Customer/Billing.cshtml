@@ -1,0 +1,71 @@
+@model RestaurantAGV.MVC.Models.Customer.BillingModel
+
+@{}
+
+
+<div class="p-5 colorBackgroundII">
+    <h1 class="mainTitleFont colorFontIII text-center my-3">Billing</h1>
+</div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md">
+            <h3 class="subTitleFont mb-5 text-center">Total Order</h3>
+            @if (@Model.OrderedOrders != null)
+            {
+                <div class="d-flex flex-column">
+                    @foreach (var item in @Model.OrderedOrders)
+                    {
+                        <partial name="assets/_OrderCard" model="item"></partial>
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-md">
+            <h3 class="subTitleFont mb-5 text-center">Billing details</h3>
+            <span class="bulletFont text-center d-block">Order Price : @Model.OrderPrice.ToString("C")</span>
+            <span class="bulletFont text-center d-block">Discount : @Model.Discount.ToString("C")</span>
+            <span class="bulletFont text-center d-block">Vat 7% : @Model.VatPrice.ToString("C")</span>
+            <span class="bulletFont text-center d-block"><b>Total Price : @Model.TotalPrice.ToString("C")</b></span>
+
+            <div class="text-center">
+                <button type="button" class="mainBtn w-50 mx-auto" data-bs-toggle="modal" data-bs-target="#paymentPart">
+                    Check Bill
+                </button>
+            </div>
+           
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="paymentPart" tabindex="-1" aria-labelledby="paymentHead" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          
+            <div class="modal-body">
+                <div class="p-4">
+                    <h4 class="subTitleFont text-center my-5" id="paymentHead">Please read before making payment</h4>
+
+                    <p class="descriptionFont my-2">
+                        Onec you’ve paid, You will not be able to refun or any operation that making change to the order.
+                    </p>
+                    <p class="descriptionFont my-2">
+                        If you have any problem about the ordered food, Then you can complain to the stuff working to figure out the problem.
+                    </p>
+
+                    <div class="my-5 text-center">
+                        <img src="~/images/MyQr.png" width="400" height="500">
+                    </div>
+
+                    <form method="post">
+                        <label for="ans" class="bulletFont">Upload Payment Slip</label>
+                        <input type="file" id="ans" name="answer" class="form-control">
+                        <input type="submit" class="mainBtn w-100 my-3" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

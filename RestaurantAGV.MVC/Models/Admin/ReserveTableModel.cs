@@ -1,0 +1,9 @@
+using RestaurantAGV.MVC.Models.Elements;
+
+namespace RestaurantAGV.MVC.Models.Admin;
+
+public class ReserveTableModel{
+
+    public IList<TableCard>? Tables {get;set;}
+
+}

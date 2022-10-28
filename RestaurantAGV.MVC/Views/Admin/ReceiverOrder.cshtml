@@ -1,0 +1,57 @@
+@model RestaurantAGV.MVC.Models.Admin.ReceiverOrderModel
+@using RestaurantAGV.MVC.Constants
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col text-center">
+            <h1 class="mainTitleFont">Incomming Order</h1>
+            @if (Model.WaitingOrder != null)
+            {
+                <div class="d-flex flex-wrap flex-column">
+                    <a asp-controller="Order" asp-action="OrderStatus" class="blockLink">
+                        @foreach(var item in Model.WaitingOrder){
+                            <partial name="assets/_OrderCard" model="item"></partial>
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="col  text-center">
+            <h1 class="mainTitleFont">Processing Order</h1>
+            @if (Model.ProcessingOrder != null)
+            {
+                <div class="d-flex flex-wrap flex-column">
+                    @foreach(var item in Model.ProcessingOrder){
+                        <partial name="assets/_OrderCard" model="item"></partial>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col  text-center">
+            <h1 class="mainTitleFont">Finished Order</h1>
+            @if (Model.FinishOrder != null)
+            {
+                <div class="d-flex flex-wrap flex-column">
+                    @foreach(var item in Model.FinishOrder){
+                        <partial name="assets/_OrderCard" model="item"></partial>
+                    }
+                </div>
+            }
+
+        </div>
+        <div class="col text-center">
+            <h1 class="mainTitleFont">Denied Order</h1>
+            @if (Model.DeniedOrder != null)
+            {
+                <div class="d-flex flex-wrap flex-column">
+                    @foreach(var item in Model.DeniedOrder){
+                        <partial name="assets/_OrderCard" model="item"></partial>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

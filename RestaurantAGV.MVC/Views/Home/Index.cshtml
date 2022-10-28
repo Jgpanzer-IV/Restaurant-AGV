@@ -1,8 +1,44 @@
-﻿@{
+﻿@model List<RestaurantAGV.MVC.Models.Home.RecommendedFood>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<p class="mainTitleFont colorFontI text-center my-5">Wellcome to Restaurant AGV</p>
+
+<div class="colorBackgroundII p-5">
+    <h1 class="mainTitleFont colorFontIII text-center my-3">Recommended Menu</h1>
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-center">
+            
+            @if(Model != null){
+                @foreach (var item in Model)
+                {
+                    <div class="recommendedFood">
+                        <img src="@item.Src" alt="Fired-Spring" class="img-fluid rounded">
+                        <p class="subTitleFont colorFontIII">@item.Name</p>
+                    </div>
+                }
+            }
+            <a asp-controller="Customer" asp-action="MenuDetail" asp-route-Id="10">
+                <div class="recommendedFood">
+                    <img src="~/images/fried-spring-rolls.jpg" alt="Fired-Spring" class="img-fluid rounded">
+                    @* <p class="subTitleFont colorFontIII">Fried spring rolls cutting board</p> *@
+                </div>
+            </a>
+            <a asp-controller="Customer" asp-action="MenuDetail" asp-route-Id="7">
+                <div class="recommendedFood">
+                    <img src="~/images/american-shrimp-fried-rice.jpg" alt="Fired-Spring" class="img-fluid rounded">
+                    @* <p class="subTitleFont colorFontIII">American Shrimp Fried</p> *@
+                </div>
+            </a>
+            <a asp-controller="Customer" asp-action="MenuDetail" asp-route-Id="9">
+                <div class="recommendedFood">
+                    <img src="~/images/fried-pork-with-garlic-pepper.jpg" alt="Fired-Spring" class="img-fluid rounded">
+                    @* <p class="subTitleFont colorFontIII">Fried Pork With Garlic Pepper</p> *@
+                </div>
+            </a>
+        </div>
+    </div>
+
+
 </div>

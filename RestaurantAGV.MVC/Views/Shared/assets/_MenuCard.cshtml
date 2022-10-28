@@ -1,0 +1,11 @@
+@model RestaurantAGV.MVC.Models.Elements.MenuCard
+
+
+<div class="menuCardContainer">
+    <img src="@Model.Src" width="300">
+    <div class="menuCardBody">
+        <p class="subTitleFont">@Model.Title</p>
+        <span>@Model.Description</span>
+    </div>
+    <a asp-controller="Customer" asp-action="MenuDetail" asp-route-id="@Model.Id" class="mainBtn">@Model.Price</a>
+</div>

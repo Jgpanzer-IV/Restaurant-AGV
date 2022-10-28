@@ -1,0 +1,21 @@
+@model RestaurantAGV.MVC.Models.Elements.MenuStatus
+
+
+<div class="menuStatusContainer">
+    <p class="subTitleFont text-center">@Model.NameMenu</p>
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li>Category : @Model.Category</li>
+                <li>Total Price : @Model.TotalPrice.ToString("C")</li>
+                <li>Quantity : @Model.Quantity</li>
+                @if(Model.Finish > 0){
+                    <li>Finish : @Model.Finish</li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <img class="img-thumbnail" width="" src="@Model.UriImage">
+        </div>
+    </div>
+</div>

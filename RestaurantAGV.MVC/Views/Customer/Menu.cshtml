@@ -1,0 +1,32 @@
+@model IList<RestaurantAGV.MVC.Models.Elements.MenuCard>
+
+<div class="colorBackgroundII h-auto p-5">
+    <div class="container">
+        <h1 class="mainTitleFont colorFontIII my-5">The Menu</h1>
+        <div class="row my-5">
+            <div class="col-md my-2">
+                <a class="mainBtn w-100" asp-action="" asp-route-type="food">Food</a>
+            </div>
+            <div class="col-md my-2">
+                <a class="btnActive w-100" asp-action="" asp-route-type="drink">Drink</a>
+            </div>
+            <div class="col-md my-2">
+                <a class="btnActive w-100" asp-action="" asp-route-type="dessert">Dessert</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="d-flex flex-wrap justify-content-center justify-content-md-between">
+        @if(Model!= null){
+            @foreach (var each in Model)
+            {   
+                <partial name="assets/_MenuCard" model="each"></partial>
+            }
+        }
+    </div>
+
+
+</div>

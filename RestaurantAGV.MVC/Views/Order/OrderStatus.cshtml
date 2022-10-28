@@ -1,0 +1,33 @@
+@model RestaurantAGV.MVC.Models.Order.OrderStatusModel
+
+@{
+
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4 m-0 bg-dark text-light">
+            <div class="m-5">
+                <h1 class="mainTitleFont my-5 text-center">Queue @Model.Queue</h1>
+                <h5 class="subTitleFont my-3">Table: @Model.TableAddress</h5>
+                <span class="bulletFont d-block">Receiver status: @((Model.ReceiverStatus)? "Accepted":"Reviewing")</span>
+                <span class="bulletFont d-block">Customer status: @((Model.CustomerStatus)? "Accepted":"Waiting")</span>
+                <span class="bulletFont d-block">Is all finish: @((Model.AllFoodOrderFinished)? "Finished":"Inprogress")</span>
+                <span class="bulletFont d-block">Total Price: @Model.TotalPrice.ToString("C")</span>
+                <span class="bulletFont d-block">Purchase time: @Model.PurchasedTime.ToString()</span>
+                <a class="mainBtn">Accept</a>
+            </div>
+        </div>
+        <div class="col-sm-8 m-0 ">
+            <h1 class="m-5 text-center mainTitleFont">@Model.Status</h1>
+            <div class="d-flex flex-wrap justify-content-center">
+                @if(Model.OrderedMenu != null){
+                    @foreach(var each in Model.OrderedMenu){
+                        <partial name="assets/_MenuStatus" model="each"></partial>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

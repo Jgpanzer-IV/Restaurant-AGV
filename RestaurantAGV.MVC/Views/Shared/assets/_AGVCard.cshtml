@@ -1,0 +1,12 @@
+@model RestaurantAGV.MVC.Models.Elements.AGVCard
+
+
+<div class="AGVCardContainer">
+    <h4 class="text-center my-3">@Model.CodeName</h4>
+    <span class="bulletFont text-center">Battery @Model.Battery %</span>
+    <div class="AGVBatteryContainer">
+        <div class="AGVBattertValue" style="width: @(Model.Battery)%;">
+
+        </div>
+    </div>
+</div>

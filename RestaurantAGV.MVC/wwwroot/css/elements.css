@@ -1,0 +1,218 @@
+/* ------------------------------------- Colors ---------------------------------- */
+.colorFontI {
+  color: #8b4301;
+}
+
+.colorFontII {
+  color: #333333;
+}
+
+.colorFontIII {
+  color: #f4f4f4;
+}
+
+.colorBackgroundI {
+  background-color: #8b4301;
+}
+
+.colorBackgroundII {
+  background-color: #333333;
+}
+.colorBackgroundIII {
+  background-color: #f4f4f4;
+}
+
+/* ------------------------------------- Fonts ---------------------------------- */
+
+.mainTitleFont {
+  font-family: "EagleLake";
+  font-size: 36px;
+}
+
+.subTitleFont {
+  font-size: 28px;
+}
+
+.bulletFont {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.descriptionFont {
+  font-size: 16px;
+  text-indent: 8px;
+}
+
+span.CardDetailFont {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  display: block;
+}
+
+span.dangerFont {
+  font-size: 12px;
+  color: red;
+}
+
+a.blockLink {
+  text-decoration: none;
+}
+
+/* ------------------------------------- Nav Bar ---------------------------------- */
+
+.navSize {
+  height: 80px;
+}
+
+.navbarStyle {
+  padding: 0%;
+  margin-bottom: 0px;
+  height: 80px;
+  border-color: none;
+  border: none;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
+}
+
+a.navMenu {
+  margin: 0px 4px;
+  height: 80px;
+  width: 160px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #8b4301;
+  background-color: #f4f4f4;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+a.navMenu:hover {
+  background-color: #8b4301;
+  color: #f4f4f4;
+}
+
+/* ------------------------------------- Buttons ---------------------------------- */
+
+.mainBtn {
+  color: #f4f4f4;
+  background-color: #8b4301;
+}
+
+.btnActive {
+  color: #f4f4f4;
+  background-color: #8b4301;
+}
+
+.btnMenu {
+  color: #8b4301;
+  background-color: #f4f4f4;
+}
+
+.Btn:hover {
+  background-color: #8b4301;
+}
+
+.mainBtn,
+.btnActive,
+.btnMenu {
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  display: block;
+  padding: 10px;
+  box-shadow: none;
+  border: none;
+}
+
+/* ------------------------------------- Image ---------------------------------- */
+div.recommendedFood {
+  width: 300px;
+  height: 300px;
+  margin: 8px;
+  padding: 12px;
+}
+
+/* ------------------------------------- MenuCard ---------------------------------- */
+div.menuCardContainer {
+  width: 300px;
+  height: auto;
+  border-radius: 4px;
+  margin: 20px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+div.menuCardBody {
+  padding: 20px;
+}
+
+/* ------------------------------------- MenuStatus ---------------------------------- */
+
+div.menuStatusContainer {
+  width: 360px;
+  height: 240px;
+  margin: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #f4f4f4;
+}
+
+div.imgBody {
+  width: 200px;
+  height: 200px;
+}
+
+/* ------------------------------------- Order Card ---------------------------------- */
+
+div.orderCardContainer {
+  width: 600px;
+  height: 100px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  margin: 12px;
+  background-color: #f4f4f4;
+}
+
+/* ------------------------------------- AGV Card ---------------------------------- */
+
+div.AGVCardContainer {
+  height: 160px;
+  width: 260px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+div.AGVBatteryContainer {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  background-color: #555555;
+}
+
+div.AGVBattertValue {
+  height: 20px;
+  background-color: #8b4301;
+}
+
+/* ------------------------------------- Table Card ---------------------------------- */
+div.TableCardContainer {
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------- Card ---------------------------------- */
+
+button.cardPopUp {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}

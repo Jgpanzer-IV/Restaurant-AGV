@@ -1,0 +1,37 @@
+@model RestaurantAGV.MVC.Models.Admin.ReserveTableModel
+
+
+<div class="colorBackgroundII p-5">
+    <h1 class="mainTitleFont text-center colorFontIII">Available Tables</h1>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex flex-wrap justify-content-center">
+        @if(Model.Tables != null){
+            @foreach (var item in Model.Tables)
+            {
+                <button class="cardPopUp" type="button" data-bs-toggle="modal" data-bs-target="#Table@(item.Id.ToString())">
+                    <partial name="assets/_TableCard" model="item"></partial>
+                </button>
+
+                <div class="modal fade" id="Table@(item.Id.ToString())" tabindex="-1" aria-labelledby="tableLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="p-3">
+                                    <h6 class="text-center my-3">@item.TableNumber</h6>
+                                    <span class="bulletFont d-block my-3 text-center">@item.Address</span>
+                                    <form>
+                                        <input type="text" name="customerNumber" class="form-control my-3" placeholder="Customer's number">
+                                        <input type="submit" class="mainBtn w-100 my-3" value="Reserve">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+</div>
