@@ -21,7 +21,7 @@
                         <span asp-validation-for="Credencial" class="form-label text-danger"></span>
                         <input asp-for="Credencial" placeholder="Customer's Credencial" class="form-control text-center">
                         <span class="form-text">@Model.ErrorMessage</span>
-                        <input asp-for="ReturnUrl" type="hidden">
+                        <input asp-for="ReturnUrl" value="@Model.ReturnUrl" type="hidden">
                     </div>
                     <button type="submit" class="mainBtn w-100">Sign in</button>
                 </form>

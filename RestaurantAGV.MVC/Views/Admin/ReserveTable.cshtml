@@ -1,11 +1,49 @@
 @model RestaurantAGV.MVC.Models.Admin.ReserveTableModel
 
 
-<div class="colorBackgroundII p-5">
-    <h1 class="mainTitleFont text-center colorFontIII">Available Tables</h1>
+<div class="colorBackgroundII p-2">
+    <h1 class="mainTitleFont text-center colorFontIII my-5">Available Tables</h1>
+    <div class="container">
+        <div class="m-5">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md"> 
+                        <select name="section" class="form-select">
+                            <option selected value="">All</option>
+                            <option value="In Room">In Room</option>
+                            <option value="Out Door">Out Door</option>
+                            <option value="VIP">VIP</option>
+                        </select>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-check">
+                            <input type="radio" name="filler" value="Reserved" id="reserved" class="form-check-input">
+                            <label class="form-check-label text-white" for="reserved">Reserved Table</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-check">
+                            <input type="radio" name="filler" value="Reservable" id="reservable" class="form-check-input">
+                            <label class="form-check-label text-white" for="reservable">Reservable Table</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-check">
+                            <input type="radio" name="filler" value="Recently Reserved" id="recently" class="form-check-input">
+                            <label class="form-check-label text-white" for="recently">Recently Reverved</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <button type="submit" class="mainBtn w-100">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="container mt-5">
+
     <div class="d-flex flex-wrap justify-content-center">
         @if(Model.Tables != null){
             @foreach (var item in Model.Tables)
@@ -21,8 +59,9 @@
                                 <div class="p-3">
                                     <h6 class="text-center my-3">@item.TableNumber</h6>
                                     <span class="bulletFont d-block my-3 text-center">@item.Address</span>
-                                    <form>
+                                    <form method="get" asp-action="RegisterCustomer">
                                         <input type="text" name="customerNumber" class="form-control my-3" placeholder="Customer's number">
+                                        <input type="hidden" name="tableId" value="@item.Id">
                                         <input type="submit" class="mainBtn w-100 my-3" value="Reserve">
                                     </form>
                                 </div>

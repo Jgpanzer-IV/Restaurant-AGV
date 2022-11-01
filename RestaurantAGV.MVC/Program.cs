@@ -1,9 +1,42 @@
 using RestaurantAGV.MVC.Constants;
+using Microsoft.EntityFrameworkCore;
+using RestaurantAGV.MVC.Database;
+using RestaurantAGV.MVC.Services.Classes;
+using RestaurantAGV.MVC.Services.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<RestaurantDbContext>(option => option.UseSqlite(builder.Configuration.GetConnectionString("RestaurantDataStore")));
+var optionDbBuilder = new DbContextOptionsBuilder<RestaurantDbContext>();
+optionDbBuilder.UseSqlite(builder.Configuration.GetConnectionString("RestaurantDataStore"));
+
+ISubscriberMQTT subscriberMqttService = new SubscriberMQTT(optionDbBuilder.Options);
+builder.Services.AddSingleton<ISubscriberMQTT>(subscriberMqttService);
+await subscriberMqttService.InitialConnectAsync("broker.hivemq.com",1883);
+await subscriberMqttService.ConnectToTopicAsync("RestaurantAGV/");
+
+IPublisherMQTT publisherMqttService = new PublisherMQTT(optionDbBuilder.Options);
+builder.Services.AddSingleton<IPublisherMQTT>(publisherMqttService);
+await publisherMqttService.InitialConnectAsync("broker.hivemq.com",1883);
+await publisherMqttService.PublishAsync("myTopic","This message sent from Web MVC.");
+
+
+builder.Services.AddScoped<IMenuRepository,MenuRepository>();
+builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
+builder.Services.AddScoped<ITableRepository,TableRepository>();
+builder.Services.AddScoped<IMenuCategoryRepository,MenuCategortRepository>();
+builder.Services.AddScoped<IBasketRepository,BasketRepository>();
+builder.Services.AddScoped<IBillingOrderRepository,BillingOrderRepository>();
+builder.Services.AddScoped<IPurchasedMenuRepository,PurchasedMenuRepository>();
+builder.Services.AddScoped<IPurchasedOrderRepository,PurchasedOrderRepository>();
+builder.Services.AddScoped<ISelectedMenuRepository,SelectedMenuRepository>();
+
+
+
 
 
 builder.Services.AddAuthentication(AuthConstants.DefaultScheme).AddCookie(AuthConstants.CookieScheme,config => {

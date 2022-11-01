@@ -1,10 +1,12 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantAGV.MVC.Models.Elements;
 using RestaurantAGV.MVC.Models.Order;
 
 namespace RestaurantAGV.MVC.Controllers;
 
+[Authorize]
 public class OrderController : Controller{
 
     public OrderController()

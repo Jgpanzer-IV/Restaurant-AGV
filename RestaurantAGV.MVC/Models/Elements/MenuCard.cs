@@ -1,4 +1,4 @@
-
+using RestaurantAGV.MVC.Models.Entities;
 namespace RestaurantAGV.MVC.Models.Elements;
 
 public class MenuCard{
@@ -8,5 +8,15 @@ public class MenuCard{
     public string Description {get;set;} = string.Empty;
     public string Src {get;set;} = string.Empty;
     public string Price {get;set;} = string.Empty;
+
+    public MenuCard(){}
+
+    public MenuCard(Menu menu){
+        Id = menu.Id;
+        Title = menu.MenuName;
+        Description = menu.Description;
+        Src = menu.UriImage;
+        Price = menu.Price.ToString("C");
+    }
 
 }

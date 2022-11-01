@@ -2,7 +2,11 @@
 
 <article>
     <div class="container">
-        <h1 class="mainTitleFont text-center my-5">AGV Status</h1>
+        <header>
+            <h1 class="mainTitleFont text-center my-5">AGV Status</h1>
+
+        </header>
+
         <div class="d-flex flex-row flex-wrap justify-content-center">
             @if (Model.AGVsStatus != null)
             {
@@ -22,7 +26,7 @@
                                     <div class="p-5">
                                         <h6 class="text-center subTitleFont">AGV @item.CodeName</h6>
                                         <form method="get" class="my-4">
-                                            <select name="agvId" class="form-select">
+                                            <select name="routeTable" class="form-select">
                                                 <option title="Table 01" value="42">Table 01</option>
                                                 <option title="Table 01" value="56">Table 02</option>
                                                 <option title="Table 01" value="75">Table 03</option>

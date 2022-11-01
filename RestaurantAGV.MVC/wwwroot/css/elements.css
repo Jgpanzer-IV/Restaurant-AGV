@@ -141,6 +141,7 @@ div.menuCardContainer {
   border-radius: 4px;
   margin: 20px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  background-color: #f4f4f4;
 }
 
 div.menuCardBody {

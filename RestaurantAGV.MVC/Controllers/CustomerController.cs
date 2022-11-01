@@ -2,99 +2,142 @@ using RestaurantAGV.MVC.Models.Elements;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantAGV.MVC.Models.Customer;
 using Microsoft.AspNetCore.Authorization;
+using RestaurantAGV.MVC.Services.Interfaces;
+using RestaurantAGV.MVC.Models.Entities;
+using RestaurantAGV.MVC.Constants;
 
 namespace RestaurantAGV.MVC.Controllers;
 
 [Authorize("CustomerPolicy")]
 public class CustomerController : Controller{
 
+    private readonly IMenuCategoryRepository _menuCategoryRepo;
+    private readonly IMenuRepository _menuRepo;
+    private readonly ISelectedMenuRepository _selectedMenuRepo;
+    private readonly IBasketRepository _basketRepo;
 
-    [HttpGet]
-    public ViewResult Menu(){
 
-        IList<MenuCard> listMenu = new List<MenuCard>(){
-            new MenuCard(){
-                Id = 1,
-                Title = "American Shrimp",
-                Description = "Description about the menu describing a detail of the meterial that used to make this menu.",
-                Src = "/images/american-shrimp-fried-rice.jpg",
-                Price = 24.ToString("C")
-            },
-            new MenuCard(){
-                Id = 2,
-                Title = "Froed Pork Garlic",
-                Description = "Description about the menu describing a detail of the meterial that used to make this menu.",
-                Src = "/images/fried-pork-with-garlic-pepper.jpg",
-                Price = 32.ToString("C")
-            },
-            new MenuCard(){
-                Id = 3,
-                Title = "Fired Spring rolls",
-                Description = "Description about the menu describing a detail of the meterial that used to make this menu.",
-                Src = "/images/fried-spring-rolls.jpg",
-                Price = 40.ToString("C")
-            }
-        };
-
-        return View(listMenu);
+    public CustomerController(
+        IMenuCategoryRepository menuRepository,
+        IMenuRepository menuRepo,
+        ISelectedMenuRepository selectedMenuRepository,
+        IBasketRepository basketRepository
+        )
+    {
+        _menuCategoryRepo = menuRepository;
+        _menuRepo = menuRepo;
+        _selectedMenuRepo = selectedMenuRepository;
+        _basketRepo = basketRepository;
     }
 
     [HttpGet]
-    public ViewResult MenuDetail(int id){
+    public async Task<ViewResult> Menu(string type = "food"){
 
-        MenuDetailModel selectedMenu = new(){
-            Id = id,
-            NameMenu = "American Shrimp Fried",
-            Price = 57.20M,
-            Description = "Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal, or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.",
-            UriImage = "/images/american-shrimp-fried-rice.jpg"
+        IList<MenuCategory>? listMenu =  await _menuCategoryRepo.RetrieveAsync();
+        IList<MenuCard> cardMenus = new List<MenuCard>();
 
-        };
+        if(listMenu == null)
+            return View(cardMenus);
+
+        if (type == "food"){
+            listMenu.Where(e => e.Id != 6 && e.Id != 7).ToList().ForEach(e => {
+                e.Menus?.ToList().ForEach(menu => {
+                    cardMenus.Add(new MenuCard(menu));
+                });
+            });
+        }
+        else if (type == "drink"){
+            listMenu.Where(e => e.Id == 7).ToList().ForEach(e => {
+                e.Menus?.ToList().ForEach(menu => {
+                    cardMenus.Add(new MenuCard(menu));
+                });
+            });
+
+        }else if (type == "dessert"){
+            listMenu.Where(e => e.Id == 6).ToList().ForEach(e => {
+                e.Menus?.ToList().ForEach(menu => {
+                    cardMenus.Add(new MenuCard(menu));
+                });
+            });
+        }
+
+        return View(cardMenus);
+    }
+
+    [HttpGet]
+    public async Task<ViewResult> MenuDetail(int id){
+
+        Menu? RetrievedMenu = await _menuRepo.RetrieveByIdAsync(id);
+        MenuDetailModel selectedMenu = new();
+
+        if(RetrievedMenu != null){
+            selectedMenu = new(){
+                Id = RetrievedMenu.Id,
+                NameMenu =  RetrievedMenu.MenuName,
+                Price =  RetrievedMenu.Price,
+                Description = RetrievedMenu.Description,
+                UriImage = RetrievedMenu.UriImage
+            };
+        }
 
         return View(selectedMenu);
     }
 
     [HttpGet]
-    public ViewResult Basket(){
+    public async Task<RedirectToActionResult> OrderMenu(string note, int quantity, int menuId){
 
-        BasketModel basketModel = new BasketModel(){
-            TotalPrice = 142.98M,
-            SelectedMenu = new List<MenuStatus>(){
-                new(){
-                    NameMenu = "American Shrimp Fried",
-                    Quantity = 3,
-                    Category = "Sea Food",
-                    Finish = 0,
-                    TotalPrice = 72.66M,
-                    UriImage = "/images/american-shrimp-fried-rice.jpg"
-                },
-                new(){
-                    NameMenu = "Fired Pork Garlic",
-                    Quantity = 1,
-                    Category = "Food",
-                    Finish = 0,
-                    TotalPrice = 14.2M,
-                    UriImage = "/images/fried-pork-with-garlic-pepper.jpg"
-                },new(){
-                    NameMenu = "SomTum Papaya",
-                    Quantity = 2,
-                    Category = "Food",
-                    Finish = 0,
-                    TotalPrice = 24.5M,
-                    UriImage = "/images/thai-food-som-tum-papaya-salad.jpg"
+        // Retrieve information about the purchaser
+        string? baskId = HttpContext.User.Claims.ToList().FirstOrDefault(e => e.Type == ClaimConstants.BasketClaimId)?.Value;
 
-                },
-                new(){
-                    NameMenu = "Fired Spring Roll",
-                    Quantity = 1,
-                    Category = "Food",
-                    Finish = 0,
-                    TotalPrice = 12.66M,
-                    UriImage = "/images/fried-spring-rolls.jpg"
-
-                }
-            }
+        // Create Selected menu for the user that have clicked the purchase button.
+        SelectedMenu selectedMenu = new(){
+            BasketId = Convert.ToInt32(baskId),
+            MenuId = menuId,
+            Quantity = quantity,
+            Note = note
         };
+
+        // Create new selectedMenu in the database
+        if (await _selectedMenuRepo.CreateAsync(selectedMenu) == null)
+            return RedirectToAction(nameof(MenuDetail));
+
+        return RedirectToAction(nameof(Basket));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Basket(){
+
+        int basketId = Convert.ToInt32(HttpContext.User.Claims.ToArray().FirstOrDefault(e => e.Type == ClaimConstants.BasketClaimId)?.Value);
+        
+        // Retrieve basket entity using basketId
+        RestaurantAGV.MVC.Models.Entities.Basket? retrieved = await _basketRepo.RetrieveByIdAsync(basketId);
+
+        // Check if it is null, Then the might be an error 
+        if(retrieved == null)
+            return RedirectToAction(nameof(MenuDetail));
+    
+        // Create enetity for view
+        BasketModel basketModel = new BasketModel();
+        basketModel.SelectedMenu = new List<MenuStatus>();
+
+        // loop to each selectedMenu entity that inside the basket 
+        for (int i=0; i<retrieved.SelectedMenus?.Count(); i++){
+
+            Menu? menu = await _menuRepo.RetrieveByIdAsync(retrieved.SelectedMenus.ElementAt(i).MenuId);
+
+            basketModel.SelectedMenu.Add(new MenuStatus(){
+                NameMenu = menu?.MenuName ?? "",
+                Category = menu?.MenuCategory?.CategoryName ?? "",
+                Finish = 0,
+                Quantity = (byte) retrieved.SelectedMenus.ElementAt(i).Quantity,
+                TotalPrice = menu?.Price * retrieved.SelectedMenus.ElementAt(i).Quantity ?? 0,
+                UriImage = menu?.UriImage ?? ""             
+            });
+        }
+
+
+        // Set the total price by sum of total price in each selectedMenu entity
+        basketModel.TotalPrice = basketModel.SelectedMenu.Sum(e => e.TotalPrice);
 
         return View(basketModel);
     }

@@ -1,16 +1,24 @@
 using RestaurantAGV.MVC.Models.Auth;
 using RestaurantAGV.MVC.Constants;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantAGV.MVC.Models.Entities;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+
+using RestaurantAGV.MVC.Services.Interfaces;
 
 namespace RestaurantAGV.MVC.Controllers;
 
 
 public class AuthController : Controller{
 
-    public AuthController()
-    {}
+    private readonly ICustomerRepository _customerRepo;
+
+
+    public AuthController(ICustomerRepository customerRepository)
+    {
+        _customerRepo = customerRepository;
+    }
 
     [HttpGet]
     public IActionResult AdminSignin(){
@@ -54,13 +62,20 @@ public class AuthController : Controller{
     [HttpPost]
     public async Task<IActionResult> CustomerSignin(CustomerSigninModel customerModel){
         
+        if (!ModelState.IsValid || string.IsNullOrEmpty(customerModel.Credencial))
+            return View(customerModel);
+        
+        Customer? signedIn = await _customerRepo.RetrieveByIdAsync(customerModel.Credencial); 
+
         // Check credencial in the Dbcontext
-        if (customerModel.Credencial == "VANS"){
+        if (signedIn != null){
             // Generate the security context based on the matched customer entity
             var claims = new List<Claim>(){
                 new Claim("roles",RoleConst.CustomerRole),
-                new Claim("table","2"),
-                new Claim("address","In room")
+                new Claim(ClaimConstants.CustomerClaimId, signedIn.Id),
+                new Claim(ClaimConstants.TableClaimId, signedIn.TableId.ToString()),
+                new Claim(ClaimConstants.BasketClaimId, signedIn.Basket?.Id.ToString() ?? ""),
+                new Claim(ClaimConstants.BillClaimId, signedIn.BillOrder?.Id.ToString() ?? "")
             };
 
             var identity = new ClaimsIdentity(claims,AuthConstants.CookieScheme);

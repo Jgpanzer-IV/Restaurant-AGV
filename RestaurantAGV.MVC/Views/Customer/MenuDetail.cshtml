@@ -1,6 +1,6 @@
 @model RestaurantAGV.MVC.Models.Customer.MenuDetailModel
 
-<div class="container">
+<div class="container my-5">
 
     <div class="row">
         <div class="col-lg">
@@ -12,11 +12,13 @@
             <p class="mainTitleFont text-center my-2">@Model.Price.ToString("C")</p>
             <p class="descriptionFont my-5">@Model.Description</p>
             <div class="my-5 text-center">
-                <form method="get" class="d-inline-block">
-                    <input type="number" step="1" value="@Model.Id" name="quantity" class="form-control" style="width: 100px; text-align: center;">
+                <form method="get" asp-action="OrderMenu" class="d-inline-block w-100 text-center">
+                    <input type="number" step="1" maxlength="5" minlength="1" name="quantity" class="form-control w-100 my-3" placeholder="Quentity" style="width: 140px; text-align: center;">
+                    <textarea class="form-control w-100" placeholder="Note for the menu" name="note"></textarea>
+                    <input type="hidden" value="@Model.Id" name="menuId">
+                    <input type="submit" class="mainBtn w-100 my-2">
                 </form>
             </div>
-            <a asp-action="Basket" class="mainBtn">Add to cart</a>
         </div>
 
     </div>
