@@ -23,34 +23,41 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 justify-content-between">
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-area="" asp-controller="Customer" asp-action="Menu">Menu</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Customer" asp-action="Basket">Basket</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Order" asp-action="OrderStatus">Order status</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Customer" asp-action="Billing">Check Bill</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Admin" asp-action="ReceiverOrder">Review Order</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Admin" asp-action="AGVStatus">AGV Status</a>
-                        </li>
-                        <li class="nav-item my-1">
-                            <a class="navMenu" asp-controller="Admin" asp-action="ReserveTable">Reserve Table</a>
-                        </li>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                    <ul class="navbar-nav flex-grow-1 justify-content-start">
+                        @if (User.HasClaim(RestaurantAGV.MVC.Constants.ClaimConstants.ClaimRole,RestaurantAGV.MVC.Constants.RoleConst.CustomerRole)){
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-area="" asp-controller="Customer" asp-action="Menu">Menu</a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-controller="Customer" asp-action="Basket">Basket</a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-controller="Customer" asp-action="Billing">Check Bill</a>
+                            </li>
+                        }
+                        else if (User.HasClaim(RestaurantAGV.MVC.Constants.ClaimConstants.ClaimRole,RestaurantAGV.MVC.Constants.RoleConst.AdminRole))
+                        {
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-controller="Admin" asp-action="ReceiverOrder">Review Order</a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-controller="Admin" asp-action="AGVStatus">AGV Status</a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="navMenu mx-2" asp-controller="Admin" asp-action="ReserveTable">Reserve Table</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+        @if(!string.IsNullOrEmpty(ViewData["problem"]?.ToString())){
+            <div class="bg-danger p-3 text-center">
+                <span class="text-white">@ViewData["problem"]</span>
+            </div>
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

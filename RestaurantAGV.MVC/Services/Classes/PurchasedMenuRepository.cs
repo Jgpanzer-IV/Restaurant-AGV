@@ -69,8 +69,11 @@ public class PurchasedMenuRepository : IPurchasedMenuRepository
         return Task.Run(() => {
             if (_dbContext.PurchasedMenues == null)
                 return null;
+
+            puchasedMenu.IsFinish = _dbContext.MenusStatus?.Where(e => e.PurchasedMenuId == puchasedMenu.Id && e.IsFinish == true).Count() == puchasedMenu.Quantity;
             PurchasedMenu? updaedEntity = _dbContext.PurchasedMenues.Update(puchasedMenu).Entity;
-            return updaedEntity;
+            int result = _dbContext.SaveChanges();
+            return (result > 0)? updaedEntity:null;
         });
     }
 }

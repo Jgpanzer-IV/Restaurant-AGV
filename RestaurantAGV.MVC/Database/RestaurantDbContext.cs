@@ -24,6 +24,7 @@ public class RestaurantDbContext : DbContext{
         public DbSet<AGVStatus>? AGVsStatus { get; set; } 
         public DbSet<SelectedMenu>? SelectedMenus {get;set;}
         public DbSet<BillOrder>? BillOrders {get;set;}
+        public DbSet<MenusStatus>? MenusStatus {get;set;}
 
 
     protected override void OnModelCreating(ModelBuilder builder){

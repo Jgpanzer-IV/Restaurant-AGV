@@ -63,7 +63,8 @@ public class TableRepository : ITableRepository
             if (_dbContext.Tables == null)
                 return null;
             Table? updaedEntity = _dbContext.Tables.Update(table).Entity;
-            return updaedEntity;
+            int result = _dbContext.SaveChanges();
+            return (result > 0)? updaedEntity:null;
         });
     }
 }

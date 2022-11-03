@@ -1,21 +1,29 @@
 @model RestaurantAGV.MVC.Models.Order.OrderStatusModel
+@using RestaurantAGV.MVC.Constants;
+
 
 @{
 
 
 }
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-4 m-0 bg-dark text-light">
             <div class="m-5">
                 <h1 class="mainTitleFont my-5 text-center">Queue @Model.Queue</h1>
                 <h5 class="subTitleFont my-3">Table: @Model.TableAddress</h5>
-                <span class="bulletFont d-block">Receiver status: @((Model.ReceiverStatus)? "Accepted":"Reviewing")</span>
-                <span class="bulletFont d-block">Customer status: @((Model.CustomerStatus)? "Accepted":"Waiting")</span>
-                <span class="bulletFont d-block">Is all finish: @((Model.AllFoodOrderFinished)? "Finished":"Inprogress")</span>
-                <span class="bulletFont d-block">Total Price: @Model.TotalPrice.ToString("C")</span>
-                <span class="bulletFont d-block">Purchase time: @Model.PurchasedTime.ToString()</span>
-                <a class="mainBtn">Accept</a>
+                <span class="bulletFont d-block">Receiver status: <strong> @((Model.ReceiverStatus)? "Accepted":"Reviewing") </strong> </span>
+                <span class="bulletFont d-block">Customer status: <strong> @((Model.CustomerStatus)? "Accepted":"Waiting") </strong></span>
+                <span class="bulletFont d-block">Is all finish: <strong> @((Model.AllFoodOrderFinished)? "Finished":"Inprogress") </strong></span>
+                <span class="bulletFont d-block">Total Price: <strong> @Model.TotalPrice.ToString("C") </strong></span>
+                <span class="bulletFont d-block">Purchase time: <strong> @Model.PurchasedTime.ToString() </strong></span>
+                
+                @if(User.HasClaim(ClaimConstants.ClaimRole,RoleConst.CustomerRole)){
+                    <a class="mainBtn" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id" asp-route-role="@RoleConst.CustomerRole">Accept this order</a>
+                }else if(User.HasClaim(ClaimConstants.ClaimRole, RoleConst.AdminRole) || User.HasClaim(ClaimConstants.ClaimRole, RoleConst.StuffRole)){
+                    <a class="mainBtn" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id" asp-route-role="@RoleConst.AdminRole">Accept to process</a>
+                }
             </div>
         </div>
         <div class="col-sm-8 m-0 ">
@@ -23,11 +31,33 @@
             <div class="d-flex flex-wrap justify-content-center">
                 @if(Model.OrderedMenu != null){
                     @foreach(var each in Model.OrderedMenu){
-                        <partial name="assets/_MenuStatus" model="each"></partial>
+                        <div class="px-3">
+                            <partial name="assets/_MenuStatus" model="each"></partial>
+                            @if(User.HasClaim(ClaimConstants.ClaimRole, RoleConst.AdminRole) || User.HasClaim(ClaimConstants.ClaimRole, RoleConst.StuffRole)){
+                                <div class="text-center">
+                                    <button data-bs-toggle="modal" data-bs-target="#updateMenu@(each.id)" class="mainBtn mx-auto" style="width: 460px;">Update menu status</button>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="modal fad" id="updateMenu@(each.id)" tabindex="-1" aria-labelledby="menuStatusLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h3 class="mainTitleFont my-3">@each.NameMenu</h3>
+                                        <h6 class="text-center my-2">Quantity : @each.Quantity</h6>
+                                        <h6 class="text-center my-2">Finish : @each.Finish</h6>
+                                        <form method="post" asp-action="UpdateMenuStatus" asp-route-orderId="@Model.Id" asp-route-purchasedMenuId="@each.id">
+                                            <input type="number" class="form-control" name="additionalFinish" placeholder="Additional finish number">
+                                            <button type="submit" class="mainBtn">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
                 }
             </div>
         </div>
-
     </div>
 </div>

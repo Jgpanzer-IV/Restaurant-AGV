@@ -3,6 +3,7 @@ namespace RestaurantAGV.MVC.Models.Elements;
 
 public class MenuStatus{
 
+    public int? id {get;set;}
     public string NameMenu {get;set;} = string.Empty;
     public string Category {get;set;} = string.Empty;
     public decimal TotalPrice {get;set;}

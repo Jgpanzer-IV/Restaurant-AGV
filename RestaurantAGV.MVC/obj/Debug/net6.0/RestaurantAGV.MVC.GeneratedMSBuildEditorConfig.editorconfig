@@ -8,105 +8,105 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RestaurantAGV.MVC
 build_property.RootNamespace = RestaurantAGV.MVC
-build_property.ProjectDir = d:\Software-Developement\Project-App\RestaurantAGV\RestaurantAGV.MVC\
+build_property.ProjectDir = D:\Software-Developement\Project-App\RestaurantAGV\RestaurantAGV.MVC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = d:\Software-Developement\Project-App\RestaurantAGV\RestaurantAGV.MVC
+build_property.MSBuildProjectDirectory = D:\Software-Developement\Project-App\RestaurantAGV\RestaurantAGV.MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/AGVStatus.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/AGVStatus.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQUdWU3RhdHVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/CustomerInfo.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/CustomerInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3VzdG9tZXJJbmZvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/ReceiverOrder.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/ReceiverOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVjZWl2ZXJPcmRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/ReserveTable.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Admin/ReserveTable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVzZXJ2ZVRhYmxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/AdminSignin.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/AdminSignin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxBZG1pblNpZ25pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/CustomerSignin.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/CustomerSignin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDdXN0b21lclNpZ25pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/Forbidden.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Auth/Forbidden.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxGb3JiaWRkZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Basket.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Basket.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQmFza2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Billing.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Billing.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQmlsbGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Menu.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTWVudS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/MenuDetail.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Customer/MenuDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTWVudURldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Home/Index.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Home/Privacy.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Order/OrderStatus.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Order/OrderStatus.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJTdGF0dXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_AGVCard.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_AGVCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGFzc2V0c1xfQUdWQ2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_MenuCard.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_MenuCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGFzc2V0c1xfTWVudUNhcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_MenuStatus.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_MenuStatus.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGFzc2V0c1xfTWVudVN0YXR1cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_OrderCard.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_OrderCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGFzc2V0c1xfT3JkZXJDYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_TableCard.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/assets/_TableCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGFzc2V0c1xfVGFibGVDYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/Error.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/_ViewImports.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/_ViewStart.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[d:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/_Layout.cshtml]
+[D:/Software-Developement/Project-App/RestaurantAGV/RestaurantAGV.MVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-mfoy1bjzdr

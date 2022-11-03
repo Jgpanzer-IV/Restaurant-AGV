@@ -34,8 +34,7 @@ builder.Services.AddScoped<IBillingOrderRepository,BillingOrderRepository>();
 builder.Services.AddScoped<IPurchasedMenuRepository,PurchasedMenuRepository>();
 builder.Services.AddScoped<IPurchasedOrderRepository,PurchasedOrderRepository>();
 builder.Services.AddScoped<ISelectedMenuRepository,SelectedMenuRepository>();
-
-
+builder.Services.AddScoped<IMenusStatusRepository,MenusStatusRepository>();
 
 
 
@@ -50,10 +49,13 @@ builder.Services.AddAuthentication(AuthConstants.DefaultScheme).AddCookie(AuthCo
 
 builder.Services.AddAuthorization(config => {
     config.AddPolicy(AuthConstants.AdminPolicy, policy => {
-        policy.RequireClaim("roles",RoleConst.StuffRole,RoleConst.AdminRole);
+        policy.RequireClaim(
+            ClaimConstants.ClaimRole,
+            RoleConst.StuffRole,
+            RoleConst.AdminRole);
     });
     config.AddPolicy(AuthConstants.CustomerPolicy, policy => {
-        policy.RequireClaim("roles",RoleConst.CustomerRole);
+        policy.RequireClaim(ClaimConstants.ClaimRole,RoleConst.CustomerRole);
     });
 });
 

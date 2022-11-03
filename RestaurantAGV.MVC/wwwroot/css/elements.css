@@ -76,7 +76,7 @@ a.blockLink {
 }
 
 a.navMenu {
-  margin: 0px 4px;
+  margin: 0px 12px;
   height: 80px;
   width: 160px;
   font-weight: 500;
@@ -151,11 +151,12 @@ div.menuCardBody {
 /* ------------------------------------- MenuStatus ---------------------------------- */
 
 div.menuStatusContainer {
-  width: 360px;
-  height: 240px;
+  width: 460px;
+  height: auto;
   margin: 16px;
   padding: 10px;
   border-radius: 4px;
+  line-height: 2;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   background-color: #f4f4f4;
 }

@@ -69,9 +69,10 @@ public class AuthController : Controller{
 
         // Check credencial in the Dbcontext
         if (signedIn != null){
+            
             // Generate the security context based on the matched customer entity
             var claims = new List<Claim>(){
-                new Claim("roles",RoleConst.CustomerRole),
+                new Claim(ClaimConstants.ClaimRole,RoleConst.CustomerRole),
                 new Claim(ClaimConstants.CustomerClaimId, signedIn.Id),
                 new Claim(ClaimConstants.TableClaimId, signedIn.TableId.ToString()),
                 new Claim(ClaimConstants.BasketClaimId, signedIn.Basket?.Id.ToString() ?? ""),

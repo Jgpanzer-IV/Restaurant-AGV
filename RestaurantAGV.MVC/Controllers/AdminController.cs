@@ -19,100 +19,48 @@ public class AdminController : Controller{
     private readonly IBasketRepository _basketRepo;
     private readonly IBillingOrderRepository _billRepo;
     private readonly IPublisherMQTT _publisherMqtt;
+    private readonly IPurchasedOrderRepository _purchasedOrder;
 
     public AdminController(
         ITableRepository tableRepository,
         ICustomerRepository customerRepository,
         IPublisherMQTT publisherMQTT, 
         IBasketRepository basketRepository,
-        IBillingOrderRepository billingOrderRepository)
+        IBillingOrderRepository billingOrderRepository,
+        IPurchasedOrderRepository purchasedOrderRepository)
     {
         _tabelRepo = tableRepository;
         _customerRepo = customerRepository;
         _basketRepo = basketRepository;
         _billRepo = billingOrderRepository;
         _publisherMqtt = publisherMQTT;
-
+        _purchasedOrder = purchasedOrderRepository;
     }
 
     [HttpGet]
-    public ViewResult ReceiverOrder(){
+    public async Task<ViewResult> ReceiverOrder(){
 
-        ReceiverOrderModel retrievedEntity = new(){
-            WaitingOrder = new List<OrderCard>(){
-                new(){
-                    Id = 4,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderWaiting,
-                    TableAddress ="InRoom 08",
-                    TotalPrice = 41M
-                },
-                  new(){
-                    Id = 5,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderWaiting,
-                    TableAddress ="InRoom 08",
-                    TotalPrice = 44M
-                },
-                  new(){
-                    Id = 6,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderWaiting,
-                    TableAddress ="InRoom 08",
-                    TotalPrice = 41M
-                },
-            },
-            ProcessingOrder = new List<OrderCard>(){
-                 new(){
-                    Id = 14,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderProcessing,
-                    TableAddress ="InRoom 10",
-                    TotalPrice = 94M
-                }
-            },
-            FinishOrder = new List<OrderCard>(){
-                new(){
-                    Id = 14,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderFinish,
-                    TableAddress ="InRoom 10",
-                    TotalPrice = 12.1M
-                },
-                new(){
-                    Id = 19,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderFinish,
-                    TableAddress ="InRoom 19",
-                    TotalPrice = 94M
-                },new(){
-                    Id = 20,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderFinish,
-                    TableAddress ="InRoom 14",
-                    TotalPrice = 94M
-                },
-                new(){
-                    Id = 21,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderFinish,
-                    TableAddress ="InRoom 15",
-                    TotalPrice = 94M
-                }
-            },
-            DeniedOrder = new List<OrderCard>(){
-                new(){
-                    Id = 11,
-                    PassedTime = DateTime.Now.Subtract(new DateTime(2022,10,27,17,20,0)).Minutes.ToString(),
-                    Status = EntityConstants.OrderDenied,
-                    TableAddress ="InRoom 15",
-                    TotalPrice = 94M
-                }
+        ReceiverOrderModel receiverOrderModel = new();
+        receiverOrderModel.WaitingOrder = new List<OrderCard>();
+        receiverOrderModel.DeniedOrder = new List<OrderCard>();
+        receiverOrderModel.FinishOrder = new List<OrderCard>();
+        receiverOrderModel.ProcessingOrder = new List<OrderCard>();
+
+        IList<PurchasedOrder>? purchasedOrders = await _purchasedOrder.RetrieveAsync();
+
+        purchasedOrders?.ToList().ForEach(e => {
+            if (e.Status == EntityConstants.OrderWaiting){
+                receiverOrderModel.WaitingOrder.Add(new OrderCard(e));
+            }else if (e.Status == EntityConstants.OrderProcessing){
+                receiverOrderModel.ProcessingOrder.Add(new OrderCard(e));
+            }else if (e.Status == EntityConstants.OrderDenied){
+                receiverOrderModel.DeniedOrder.Add(new OrderCard(e));
+            }else{
+                receiverOrderModel.FinishOrder.Add(new OrderCard(e));
             }
+        });
 
-        };
-
-        return View(retrievedEntity);
+        return View(receiverOrderModel);
     }
 
 
@@ -159,17 +107,21 @@ public class AdminController : Controller{
 
     [HttpGet]
     public async Task<ViewResult> ReserveTable(string section,string filler){
-
+        
+        // Instanciate the object that needed to be sent to view
         ReserveTableModel tables = new();
         tables.Tables = new List<TableCard>();
         tables.AddressList = new List<SelectListItem>();
 
+        // Retrieve all entities of table entity
         IList<Table>? retrieved = await _tabelRepo.RetrieveAsync();
 
         if (retrieved != null){
-            retrieved.ToList().ForEach(e => {
+            
+            retrieved.DistinctBy(e => e.Address).ToList().ForEach(e => {
                 tables.AddressList.Add(new SelectListItem(e.Address,e.Address));
             });
+
             // Filler here
             if(!string.IsNullOrEmpty(section))
             {
@@ -201,8 +153,6 @@ public class AdminController : Controller{
 
         }
 
-        
-
 
         return View(tables);
     }
@@ -212,6 +162,7 @@ public class AdminController : Controller{
 
         // Retrieve reserved table 
         Table? table = await _tabelRepo.RetrieveByIdAsync(tableId);
+
         // If it null then return to the reserve table page
         if (table == null)
             return RedirectToAction(nameof(ReserveTable));
@@ -255,7 +206,6 @@ public class AdminController : Controller{
             table.IsReserved = true;
             if (await _tabelRepo.UpdateAsync(table) == null)
                 return RedirectToAction(nameof(ReserveTable));
-
         }
 
 

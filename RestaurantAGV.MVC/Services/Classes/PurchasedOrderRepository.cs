@@ -2,6 +2,7 @@ using RestaurantAGV.MVC.Models.Entities;
 using RestaurantAGV.MVC.Services.Interfaces;
 using RestaurantAGV.MVC.Database;
 using Microsoft.EntityFrameworkCore;
+using RestaurantAGV.MVC.Constants;
 
 namespace RestaurantAGV.MVC.Services.Classes;
 
@@ -44,7 +45,7 @@ public class PurchasedOrderRepository : IPurchasedOrderRepository
         return Task.Run(() => {
             if (_dbContext.PurchasedOrders == null)
                 return null;
-            IList<PurchasedOrder> purchasedOrders = _dbContext.PurchasedOrders.AsNoTracking().ToList();
+            IList<PurchasedOrder> purchasedOrders = _dbContext.PurchasedOrders.Include(e => e.Customer).AsNoTracking().ToList();
             return (purchasedOrders.Count > 0)? purchasedOrders:null;
         });
     }
@@ -62,13 +63,26 @@ public class PurchasedOrderRepository : IPurchasedOrderRepository
         });
     }
 
-    public Task<PurchasedOrder?> UpdateAsync(PurchasedOrder puchasedOrder)
+    public Task<PurchasedOrder?> UpdateAsync(PurchasedOrder purchasedOrder)
     {
         return Task.Run(() => {
             if (_dbContext.PurchasedOrders == null)
                 return null;
-            PurchasedOrder? updaedEntity = _dbContext.PurchasedOrders.Update(puchasedOrder).Entity;
-            return updaedEntity;
+
+            purchasedOrder.IsAllFinish = purchasedOrder.PurchasedMenus?.All(e=>e.IsFinish == true) ?? false;
+
+            // Check update for receiver status
+            purchasedOrder.Status = (purchasedOrder.ReceiverStatus)? EntityConstants.OrderProcessing:EntityConstants.OrderWaiting;
+
+            // Check update for customer status
+            purchasedOrder.Status = (purchasedOrder.IsAllFinish)? EntityConstants.OrderFinish:purchasedOrder.Status;
+
+            PurchasedOrder? updaedEntity = _dbContext.PurchasedOrders.Update(purchasedOrder).Entity;
+            int result = _dbContext.SaveChanges();
+            return (result > 0)? updaedEntity:null;
         });
     }
+
+
+
 }

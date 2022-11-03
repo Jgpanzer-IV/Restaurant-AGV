@@ -13,5 +13,7 @@ public static class EntityConstants{
     public static readonly string TableVIP = "VIP";
 
 
+    // Billing Order 
+    public static readonly decimal VatPercentage = 7M; 
 
 }
