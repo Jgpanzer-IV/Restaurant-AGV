@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h3vfV/ACQiwl92wRAUhqhdHif0qsSrQRpKSvBYO4Rd8=",
+  "Hash": "x0K2U7sobtdtNMaeDS4q5d7U4l5Zm9Ozd+/w9LIeJp0=",
   "Source": "RestaurantAGV.MVC",
   "BasePath": "_content/RestaurantAGV.MVC",
   "Mode": "Default",
@@ -355,6 +355,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\thai-food-som-tum-papaya-salad.jpg"
+    },
+    {
+      "Identity": "D:\\Software-Developement\\Project-App\\RestaurantAGV\\RestaurantAGV.MVC\\wwwroot\\js\\jquery-3.6.1.min.js",
+      "SourceId": "RestaurantAGV.MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Software-Developement\\Project-App\\RestaurantAGV\\RestaurantAGV.MVC\\wwwroot\\",
+      "BasePath": "_content/RestaurantAGV.MVC",
+      "RelativePath": "js/jquery-3.6.1.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\jquery-3.6.1.min.js"
     },
     {
       "Identity": "D:\\Software-Developement\\Project-App\\RestaurantAGV\\RestaurantAGV.MVC\\wwwroot\\js\\site.js",

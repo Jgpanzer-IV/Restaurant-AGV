@@ -13,8 +13,8 @@
             <p class="descriptionFont my-5">@Model.Description</p>
             <div class="my-5 text-center">
                 <form method="get" asp-action="OrderMenu" class="d-inline-block w-100 text-center">
-                    <input type="number" step="1" maxlength="5" minlength="1" name="quantity" class="form-control w-100 my-3" placeholder="Quentity" style="width: 140px; text-align: center;">
-                    <textarea class="form-control w-100" placeholder="Note for the menu" name="note"></textarea>
+                    <input id="quantityForm" type="number" step="1" name="quantity" class="form-control w-100 my-3" placeholder="Quentity" style="width: 140px; text-align: center;">
+                    <textarea id="noteForm" rows="4" class="form-control w-100" placeholder="Note for the menu" name="note"></textarea>
                     <input type="hidden" value="@Model.Id" name="menuId">
                     <input type="submit" class="mainBtn w-100 my-2">
                 </form>
@@ -24,3 +24,37 @@
     </div>
 
 </div>
+
+
+@section Scripts{
+
+    <script src="~/js/jquery-3.6.1.min.js" asp-append-version="true"></script>
+
+    <script>
+
+        $(function(){
+
+            $('#quantityForm').on('change',function(event) {
+                if ($(this).val() >= 5){
+                    alert('The quantity must below 5 unit per order.');
+                    $(this).val(5);
+                }else if($(this).val() <= 0){
+                    $(this).val(1);
+                }
+            });
+
+            $('#noteForm').on('change', function(event){
+                var contentLength = String($(event.target).val());
+                if(contentLength.length > 128){
+                    alert('Note content must below 128 character');
+                    var previous = String($(this).val()).substring(0,127);
+                    $(this).val(previous);
+                }   
+
+            });
+
+        });
+
+    </script>
+
+}

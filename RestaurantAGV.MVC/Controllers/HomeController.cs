@@ -16,14 +16,16 @@ public class HomeController : Controller
     }
     
     [Authorize]
-    public IActionResult Index()
+    public ViewResult Index()
     {
         return View();
     }
 
-    public IActionResult Privacy()
+    public ViewResult Privacy()
     {
+        
         return View();
+        
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -98,7 +98,10 @@ public class AdminController : Controller{
         };
 
         if (!string.IsNullOrEmpty(agvId)){
-            _publisherMqtt.PublishAsync("myTopic"," Id : "+agvId +" : "+ routeTable);
+            //_publisherMqtt.PublishAsync("RestaurantAGV"," Id : "+agvId +" : "+ routeTable);
+            
+            // Testing 
+            _publisherMqtt.PublishAsync("RestaurantAGV",routeTable);
         }
 
 
@@ -122,7 +125,7 @@ public class AdminController : Controller{
                 tables.AddressList.Add(new SelectListItem(e.Address,e.Address));
             });
 
-            // Filler here
+            // Filter here
             if(!string.IsNullOrEmpty(section))
             {
                 retrieved = retrieved.Where(e => e.Address == section).ToList();

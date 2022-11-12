@@ -79,7 +79,9 @@ public class CustomerController : Controller{
     [HttpGet]
     public async Task<ViewResult> MenuDetail(int id){
 
+        // Retrieve from the database via repository using id
         Menu? RetrievedMenu = await _menuRepo.RetrieveByIdAsync(id);
+
         MenuDetailModel selectedMenu = new();
 
         if(RetrievedMenu != null){

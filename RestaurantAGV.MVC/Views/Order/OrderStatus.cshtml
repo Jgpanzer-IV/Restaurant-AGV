@@ -22,7 +22,7 @@
                 @if(User.HasClaim(ClaimConstants.ClaimRole,RoleConst.CustomerRole)){
                     <a class="mainBtn" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id" asp-route-role="@RoleConst.CustomerRole">Accept this order</a>
                 }else if(User.HasClaim(ClaimConstants.ClaimRole, RoleConst.AdminRole) || User.HasClaim(ClaimConstants.ClaimRole, RoleConst.StuffRole)){
-                    <a class="mainBtn" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id" asp-route-role="@RoleConst.AdminRole">Accept to process</a>
+                    <a class="mainBtn" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id" asp-route-role="@RoleConst.AdminRole">Update status</a>
                 }
             </div>
         </div>

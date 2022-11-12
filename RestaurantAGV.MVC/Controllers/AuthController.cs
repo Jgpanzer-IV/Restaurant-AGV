@@ -94,8 +94,8 @@ public class AuthController : Controller{
     }
 
 
-    public ViewResult Forbidden(){
-        return View();
+    public RedirectToActionResult Forbidden(){
+        return RedirectToAction(controllerName: "Home",actionName: "Index");
     }
 
 }

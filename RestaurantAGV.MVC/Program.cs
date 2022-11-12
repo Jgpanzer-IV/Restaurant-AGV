@@ -17,12 +17,12 @@ optionDbBuilder.UseSqlite(builder.Configuration.GetConnectionString("RestaurantD
 ISubscriberMQTT subscriberMqttService = new SubscriberMQTT(optionDbBuilder.Options);
 builder.Services.AddSingleton<ISubscriberMQTT>(subscriberMqttService);
 await subscriberMqttService.InitialConnectAsync("broker.hivemq.com",1883);
-await subscriberMqttService.ConnectToTopicAsync("RestaurantAGV/");
+await subscriberMqttService.ConnectToTopicAsync("RestaurantAGV");
 
 IPublisherMQTT publisherMqttService = new PublisherMQTT(optionDbBuilder.Options);
 builder.Services.AddSingleton<IPublisherMQTT>(publisherMqttService);
 await publisherMqttService.InitialConnectAsync("broker.hivemq.com",1883);
-await publisherMqttService.PublishAsync("myTopic","This message sent from Web MVC.");
+// await publisherMqttService.PublishAsync("RestaurantAGV","This message sent from Web MVC.");
 
 
 builder.Services.AddScoped<IMenuRepository,MenuRepository>();
@@ -37,8 +37,8 @@ builder.Services.AddScoped<ISelectedMenuRepository,SelectedMenuRepository>();
 builder.Services.AddScoped<IMenusStatusRepository,MenusStatusRepository>();
 
 
-
-builder.Services.AddAuthentication(AuthConstants.DefaultScheme).AddCookie(AuthConstants.CookieScheme,config => {
+builder.Services.AddAuthentication(AuthConstants.DefaultScheme)
+    .AddCookie(AuthConstants.CookieScheme,config => {
     config.Cookie.Name = AuthConstants.Cookie;
     config.AccessDeniedPath = new PathString("/Auth/Forbidden");
     config.LoginPath = new PathString("/Auth/CustomerSignin");
@@ -62,12 +62,6 @@ builder.Services.AddAuthorization(config => {
 
 
 
-
-
-
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -80,6 +74,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 app.UseAuthentication();

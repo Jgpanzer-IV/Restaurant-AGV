@@ -10,6 +10,7 @@ public class OrderCard{
     public string? Status {get;set;}
     public string? TableAddress {get;set;}
 
+
     public OrderCard(){}
 
     public OrderCard(PurchasedOrder purchasedOrder){

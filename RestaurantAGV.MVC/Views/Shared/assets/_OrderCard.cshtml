@@ -2,14 +2,14 @@
 
 <a class="blockLink" asp-action="OrderStatus" asp-controller="Order" asp-route-orderId="@Model.Id">
     <div class="orderCardContainer">
-        <h3 class="text-center subTitleFont">@Model.Id</h3>
+        <h3 class="text-center colorFontI subTitleFont">Order Id : @Model.Id</h3>
         <span class="dangerFont d-block text-center">This has orderd @Model.PassedTime m ago</span>
         <div class="row">
             <div class="col">
                 <span class="colorFontI CardDetailFont">@Model.TotalPrice.ToString("C")</span>
             </div>
             <div class="col">
-                <span class="colorFontI CardDetailFont">@Model.TableAddress</span>
+                <span class="colorFontI CardDetailFont">Table Id : @Model.TableAddress</span>
             </div>
             <div class="col colorFontI">
                 <span class="colorFontI CardDetailFont">@Model.Status</span>
